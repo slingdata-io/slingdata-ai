@@ -1,7 +1,7 @@
 ---
 name: sling:prime
 description: Load Sling documentation into context for a specific topic
-allowed-tools: Read
+allowed-tools: Read, Glob, WebFetch
 arguments:
   - name: topic
     description: "Topic to load: connections, replications, pipelines, api-specs, transforms, hooks, troubleshooting, all"
@@ -20,16 +20,16 @@ Load topic-specific Sling documentation into the conversation context. This help
 
 ## Topics
 
-| Topic | Files Loaded | Use For |
-|-------|--------------|---------|
-| `connections` | CONNECTIONS.md | Setting up and managing connections |
-| `replications` | REPLICATIONS.md | Creating replication configs |
-| `pipelines` | PIPELINES.md | Creating multi-step pipelines |
-| `api-specs` | api-specs/*.md (12 files) | Building API specifications |
-| `transforms` | TRANSFORMS.md | Data transformation functions |
-| `hooks` | HOOKS.md | Pre/post hooks in replications |
-| `troubleshooting` | TROUBLESHOOTING.md | Debugging common issues |
-| `all` | All resources | Full knowledge base |
+| Topic | Description |
+|-------|-------------|
+| `connections` | Setting up and managing connections |
+| `replications` | Creating replication configs |
+| `pipelines` | Creating multi-step pipelines |
+| `api-specs` | Building API specifications |
+| `transforms` | Data transformation functions |
+| `hooks` | Pre/post hooks in replications |
+| `troubleshooting` | Debugging common issues |
+| `all` | Full knowledge base |
 
 ## Instructions
 
@@ -37,45 +37,51 @@ When the user invokes this command:
 
 1. **Determine the topic** from the argument
 
-2. **Read the corresponding files** from the skills/sling-cli/resources/ directory:
+2. **Find the plugin root** by using Glob to locate the skills directory:
+   ```
+   Glob pattern: "**/skills/sling-cli/resources/CONNECTIONS.md"
+   ```
+   Extract the base path from the result (everything before `skills/sling-cli/resources/`)
+
+3. **Read the corresponding files** based on topic:
 
    **connections**:
-   - `skills/sling-cli/resources/CONNECTIONS.md`
+   - `<plugin_root>/skills/sling-cli/resources/CONNECTIONS.md`
 
    **replications**:
-   - `skills/sling-cli/resources/REPLICATIONS.md`
+   - `<plugin_root>/skills/sling-cli/resources/REPLICATIONS.md`
 
    **pipelines**:
-   - `skills/sling-cli/resources/PIPELINES.md`
+   - `<plugin_root>/skills/sling-cli/resources/PIPELINES.md`
 
-   **api-specs** (load all):
-   - `skills/sling-cli/resources/api-specs/README.md`
-   - `skills/sling-cli/resources/api-specs/AUTHENTICATION.md`
-   - `skills/sling-cli/resources/api-specs/ENDPOINTS.md`
-   - `skills/sling-cli/resources/api-specs/REQUEST.md`
-   - `skills/sling-cli/resources/api-specs/PAGINATION.md`
-   - `skills/sling-cli/resources/api-specs/RESPONSE.md`
-   - `skills/sling-cli/resources/api-specs/PROCESSORS.md`
-   - `skills/sling-cli/resources/api-specs/VARIABLES.md`
-   - `skills/sling-cli/resources/api-specs/QUEUES.md`
-   - `skills/sling-cli/resources/api-specs/INCREMENTAL.md`
-   - `skills/sling-cli/resources/api-specs/DYNAMIC.md`
-   - `skills/sling-cli/resources/api-specs/FUNCTIONS.md`
-   - `skills/sling-cli/resources/api-specs/RULES.md`
+   **api-specs** (load all 13 files):
+   - `<plugin_root>/skills/sling-cli/resources/api-specs/README.md`
+   - `<plugin_root>/skills/sling-cli/resources/api-specs/AUTHENTICATION.md`
+   - `<plugin_root>/skills/sling-cli/resources/api-specs/ENDPOINTS.md`
+   - `<plugin_root>/skills/sling-cli/resources/api-specs/REQUEST.md`
+   - `<plugin_root>/skills/sling-cli/resources/api-specs/PAGINATION.md`
+   - `<plugin_root>/skills/sling-cli/resources/api-specs/RESPONSE.md`
+   - `<plugin_root>/skills/sling-cli/resources/api-specs/PROCESSORS.md`
+   - `<plugin_root>/skills/sling-cli/resources/api-specs/VARIABLES.md`
+   - `<plugin_root>/skills/sling-cli/resources/api-specs/QUEUES.md`
+   - `<plugin_root>/skills/sling-cli/resources/api-specs/INCREMENTAL.md`
+   - `<plugin_root>/skills/sling-cli/resources/api-specs/DYNAMIC.md`
+   - `<plugin_root>/skills/sling-cli/resources/api-specs/FUNCTIONS.md`
+   - `<plugin_root>/skills/sling-cli/resources/api-specs/RULES.md`
 
    **transforms**:
-   - `skills/sling-cli/resources/TRANSFORMS.md`
+   - `<plugin_root>/skills/sling-cli/resources/TRANSFORMS.md`
 
    **hooks**:
-   - `skills/sling-cli/resources/HOOKS.md`
+   - `<plugin_root>/skills/sling-cli/resources/HOOKS.md`
 
    **troubleshooting**:
-   - `skills/sling-cli/resources/TROUBLESHOOTING.md`
+   - `<plugin_root>/skills/sling-cli/resources/TROUBLESHOOTING.md`
 
    **all**:
    - All of the above files
 
-3. **Confirm to the user** what was loaded:
+4. **Confirm to the user** what was loaded:
    - List the files read
    - Summarize the topics covered
    - Indicate readiness to help with that topic
