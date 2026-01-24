@@ -1,5 +1,5 @@
 ---
-name: conns
+name: sling:conns
 description: Manage Sling connections - list, test, or discover streams
 allowed-tools: mcp__sling__connection, mcp__sling__database
 arguments:

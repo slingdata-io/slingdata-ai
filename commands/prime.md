@@ -1,5 +1,5 @@
 ---
-name: prime
+name: sling:prime
 description: Load Sling documentation into context for a specific topic
 allowed-tools: Read
 arguments:

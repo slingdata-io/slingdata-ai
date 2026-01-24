@@ -1,5 +1,5 @@
 ---
-name: run
+name: sling:run
 description: Execute a Sling replication or pipeline file
 allowed-tools: Read, mcp__sling__replication, mcp__sling__pipeline
 arguments:
