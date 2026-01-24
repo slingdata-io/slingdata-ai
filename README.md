@@ -59,7 +59,6 @@ claude --plugin-dir /path/to/slingdata-ai
 |---------|-------------|
 | `/sling:run <file>` | Execute a replication or pipeline YAML file |
 | `/sling:conns <action>` | Manage connections (list, test, discover) |
-| `/sling:prime <topic>` | Load documentation into context |
 
 ### Agents
 
@@ -116,7 +115,6 @@ The plugin configures the Sling MCP server which provides tools for:
    ```
    /sling:conns list
    /sling:conns test MY_POSTGRES
-   /sling:prime replications
    ```
 
 ## Documentation

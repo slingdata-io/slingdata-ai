@@ -152,7 +152,6 @@ claude --plugin-dir /Users/fritz/__/Git/slingdata-ai
 # Test commands
 /sling:conns list
 /sling:run <file>
-/sling:prime connections
 
 # Test agents (via Task tool or direct invocation)
 ```
