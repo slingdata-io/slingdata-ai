@@ -147,7 +147,7 @@ Configures the Sling MCP server which provides tools:
 
 ```bash
 # Load plugin locally
-claude --plugin-dir /Users/fritz/__/Git/slingdata-ai
+claude --plugin-dir path/to/slingdata-ai
 
 # Test commands
 /sling:conns list

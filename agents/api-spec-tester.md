@@ -199,7 +199,7 @@ incremental:
 
 3. **Check API documentation** for exact parameter names and formats
 
-4. **Compare with working specs** in `/Users/fritz/__/Git/sling-api-spec/specs/`
+4. **Compare with working specs** in `https://github.com/slingdata-io/sling-api-spec/tree/main/specs` (use `gh` cli tool to access)
 
 5. **Look for API-specific quirks**:
    - Some APIs require specific headers

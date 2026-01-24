@@ -35,7 +35,7 @@ This agent performs **read-only research** to cross-reference API implementation
 
 ### Sling
 
-- Existing specs: `/Users/fritz/__/Git/sling-api-spec/specs/`
+- Existing specs: `https://github.com/slingdata-io/sling-api-spec/tree/main/specs` (use `gh` cli tool to access)
 - Documentation: `https://docs.slingdata.io/connections/api-connections/`
 
 ## Research Checklist

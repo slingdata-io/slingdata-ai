@@ -29,10 +29,7 @@ Before building a spec, ensure you have:
 
 ## Spec File Location
 
-New specs should be created at:
-```
-/Users/fritz/__/Git/sling-api-spec/specs/<api-name>/<api-name>.yaml
-```
+Ask the user where should we save new specs.
 
 ## Building Process
 
