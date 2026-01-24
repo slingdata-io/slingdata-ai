@@ -1,7 +1,7 @@
 ---
 name: sling:prime
 description: Load Sling documentation into context for a specific topic
-allowed-tools: Read, Glob, WebFetch
+allowed-tools: Read, Glob
 arguments:
   - name: topic
     description: "Topic to load: connections, replications, pipelines, api-specs, transforms, hooks, troubleshooting, all"
@@ -10,7 +10,7 @@ arguments:
 
 # /sling:prime - Load Knowledge Into Context
 
-Load topic-specific Sling documentation into the conversation context. This helps the assistant provide more accurate and detailed guidance.
+Load topic-specific Sling documentation into the conversation context.
 
 ## Usage
 
@@ -35,72 +35,37 @@ Load topic-specific Sling documentation into the conversation context. This help
 
 When the user invokes this command:
 
-1. **Determine the topic** from the argument
+1. **Find the plugin's skill resources** by searching for the installed plugin:
+   - Use Glob to find: `~/.claude/plugins/cache/**/sling-cli/resources/CONNECTIONS.md`
+   - The parent directory of the found file is the resources directory
 
-2. **Find the plugin root** by using Glob to locate the skills directory:
-   ```
-   Glob pattern: "**/skills/sling-cli/resources/CONNECTIONS.md"
-   ```
-   Extract the base path from the result (everything before `skills/sling-cli/resources/`)
+2. **Read the requested topic files** from that resources directory:
 
-3. **Read the corresponding files** based on topic:
+   **connections**: Read `CONNECTIONS.md`
 
-   **connections**:
-   - `<plugin_root>/skills/sling-cli/resources/CONNECTIONS.md`
+   **replications**: Read `REPLICATIONS.md`
 
-   **replications**:
-   - `<plugin_root>/skills/sling-cli/resources/REPLICATIONS.md`
+   **pipelines**: Read `PIPELINES.md`
 
-   **pipelines**:
-   - `<plugin_root>/skills/sling-cli/resources/PIPELINES.md`
+   **api-specs**: Read all files in `api-specs/` subdirectory (13 files)
 
-   **api-specs** (load all 13 files):
-   - `<plugin_root>/skills/sling-cli/resources/api-specs/README.md`
-   - `<plugin_root>/skills/sling-cli/resources/api-specs/AUTHENTICATION.md`
-   - `<plugin_root>/skills/sling-cli/resources/api-specs/ENDPOINTS.md`
-   - `<plugin_root>/skills/sling-cli/resources/api-specs/REQUEST.md`
-   - `<plugin_root>/skills/sling-cli/resources/api-specs/PAGINATION.md`
-   - `<plugin_root>/skills/sling-cli/resources/api-specs/RESPONSE.md`
-   - `<plugin_root>/skills/sling-cli/resources/api-specs/PROCESSORS.md`
-   - `<plugin_root>/skills/sling-cli/resources/api-specs/VARIABLES.md`
-   - `<plugin_root>/skills/sling-cli/resources/api-specs/QUEUES.md`
-   - `<plugin_root>/skills/sling-cli/resources/api-specs/INCREMENTAL.md`
-   - `<plugin_root>/skills/sling-cli/resources/api-specs/DYNAMIC.md`
-   - `<plugin_root>/skills/sling-cli/resources/api-specs/FUNCTIONS.md`
-   - `<plugin_root>/skills/sling-cli/resources/api-specs/RULES.md`
+   **transforms**: Read `TRANSFORMS.md`
 
-   **transforms**:
-   - `<plugin_root>/skills/sling-cli/resources/TRANSFORMS.md`
+   **hooks**: Read `HOOKS.md`
 
-   **hooks**:
-   - `<plugin_root>/skills/sling-cli/resources/HOOKS.md`
+   **troubleshooting**: Read `TROUBLESHOOTING.md`
 
-   **troubleshooting**:
-   - `<plugin_root>/skills/sling-cli/resources/TROUBLESHOOTING.md`
+   **all**: Read all of the above
 
-   **all**:
-   - All of the above files
+3. **Confirm to the user** what was loaded and indicate readiness to help with that topic.
 
-4. **Confirm to the user** what was loaded:
-   - List the files read
-   - Summarize the topics covered
-   - Indicate readiness to help with that topic
-
-## Examples
+## Example Glob Path
 
 ```
-/sling:prime connections
-→ Loaded connection management documentation. Ready to help with setting up databases, file systems, and API connections.
-
-/sling:prime api-specs
-→ Loaded 13 API specification files covering authentication, pagination, endpoints, and more. Ready to help build API specs.
-
-/sling:prime all
-→ Loaded full Sling knowledge base (21 files). Ready to assist with any Sling topic.
+~/.claude/plugins/cache/**/sling-cli/resources/CONNECTIONS.md
 ```
 
-## Notes
-
-- Use this before asking complex questions about a specific topic
-- For quick questions, the base SKILL.md context is usually sufficient
-- For API spec development, always prime with `api-specs` first
+This will find files like:
+```
+/Users/fritz/.claude/plugins/cache/slingdata-ai/sling/1.0.0/skills/sling-cli/resources/CONNECTIONS.md
+```
