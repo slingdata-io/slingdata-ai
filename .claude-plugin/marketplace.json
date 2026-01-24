@@ -11,7 +11,10 @@
   "plugins": [
     {
       "name": "sling-ai",
-      "source": ".",
+      "source": {
+        "source": "github",
+        "repo": "slingdata-io/sling-ai"
+      },
       "description": "Data integration CLI for moving data between 40+ databases, file systems, and APIs",
       "version": "1.0.0",
       "author": {
