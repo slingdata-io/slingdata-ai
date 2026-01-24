@@ -1,0 +1,35 @@
+{
+  "name": "sling-ai",
+  "owner": {
+    "name": "Sling",
+    "email": "support@slingdata.io"
+  },
+  "metadata": {
+    "description": "Sling data integration plugins for Claude Code",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "sling-ai",
+      "source": ".",
+      "description": "Data integration CLI for moving data between 40+ databases, file systems, and APIs",
+      "version": "1.0.0",
+      "author": {
+        "name": "Sling",
+        "email": "support@slingdata.io"
+      },
+      "homepage": "https://docs.slingdata.io",
+      "repository": "https://github.com/slingdata-io/sling-ai",
+      "license": "AGPL-3.0",
+      "keywords": [
+        "data-integration",
+        "etl",
+        "database",
+        "replication",
+        "api",
+        "pipeline"
+      ],
+      "category": "data"
+    }
+  ]
+}
