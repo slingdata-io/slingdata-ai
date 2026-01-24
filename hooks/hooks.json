@@ -1,0 +1,20 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sling --version 2>/dev/null || echo 'Warning: sling CLI not found in PATH. Install from https://docs.slingdata.io/sling-cli/getting-started'",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/check-version.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

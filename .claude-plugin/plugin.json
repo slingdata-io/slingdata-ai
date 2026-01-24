@@ -1,0 +1,20 @@
+{
+  "name": "sling",
+  "version": "1.0.0",
+  "description": "Data integration CLI for moving data between 40+ databases, file systems, and APIs",
+  "author": {
+    "name": "Sling",
+    "url": "https://github.com/slingdata-io"
+  },
+  "homepage": "https://docs.slingdata.io",
+  "repository": "https://github.com/slingdata-io/sling-cli",
+  "license": "AGPL-3.0",
+  "keywords": [
+    "data-integration",
+    "etl",
+    "database",
+    "replication",
+    "api",
+    "pipeline"
+  ]
+}
