@@ -4,7 +4,8 @@ description: Test and debug Sling API specifications
 model: sonnet
 allowed-tools: Read, Edit, mcp__sling__api_spec, mcp__sling__connection
 skills:
-  - sling-cli
+  - sling-api-specs
+  - sling-troubleshooting
 ---
 
 # API Spec Tester Agent
@@ -27,7 +28,7 @@ This agent **tests and debugs** API specifications. It uses MCP tools to run tes
          api_key: "<key>"
    ```
 
-2. **Knowledge loaded** from `skills/sling-cli/resources/api-specs/`
+2. **Knowledge loaded** from the `sling-api-specs` and `sling-troubleshooting` skills (auto-loaded)
 
 ## Testing Process
 

@@ -1,3 +1,10 @@
+---
+name: sling-hooks
+description: >
+  Pre/post actions and hooks for Sling replications and pipelines.
+  Use when adding actions before/after replications, executing SQL queries, sending HTTP webhooks, validating data with checks, running shell commands, copying/deleting files, or implementing notifications.
+---
+
 # Hooks and Steps Reference
 
 Hooks are custom actions that execute at specific points in replications. Steps are the same concept used in pipelines.
@@ -151,13 +158,6 @@ streams:
   id: file_list
 ```
 
-### inspect
-```yaml
-- type: inspect
-  location: "postgres/public.users"
-  id: table_info
-```
-
 ### store
 ```yaml
 - type: store
@@ -171,8 +171,6 @@ streams:
   path: /path/to/other_replication.yaml
   select_streams: ["table1"]
   mode: incremental
-  env:
-    SLING_THREADS: 5
 ```
 
 ### group
@@ -187,20 +185,11 @@ streams:
       query: "ANALYZE {loop.value}"
 ```
 
-### routine
-```yaml
-- type: routine
-  path: /path/to/steps.yaml
-  vars:
-    table_name: "users"
-```
-
 ## Variables
 
 Variables use `{variable.path}` syntax within hook properties.
 
 ### Debug: Print All Variables
-
 ```yaml
 - type: log
   message: '{runtime_state}'  # Prints all available variables as JSON
@@ -247,55 +236,6 @@ execution.status.success    # Count of successful streams
 stream.table / stream.schema      # Source table info
 object.table / object.full_name   # Target table info
 ```
-
-### Hook Output with state.*
-
-```yaml
-hooks:
-  start:
-    - type: query
-      id: my_query  # Required to reference later
-      connection: MY_DB
-      query: "SELECT MAX(id) as max_id FROM users"
-
-  end:
-    - type: log
-      message: "Max ID: {state.my_query.result[0].max_id}"
-```
-
-### Stored Values with store.*
-
-```yaml
-hooks:
-  pre:
-    - type: store
-      key: start_time
-      value: "{timestamp.datetime}"
-
-  post:
-    - type: log
-      message: "Started at: {store.start_time}"
-```
-
-### Common Patterns
-
-```yaml
-# Conditional execution
-- type: http
-  if: run.status == "success"
-  url: "https://webhook.example.com"
-
-# Check for errors before proceeding
-- type: check
-  check: execution.status.error == 0
-  on_failure: break
-
-# Dynamic file paths
-- type: write
-  to: "s3://bucket/logs/{timestamp.YYYY}/{timestamp.MM}/{stream.table}.log"
-```
-
-For complete field reference, see https://docs.slingdata.io/concepts/hooks#variables-available
 
 ## Error Handling
 
@@ -372,4 +312,4 @@ streams:
 
 ## Full Documentation
 
-See https://docs.slingdata.io/concepts/hooks for complete reference.
+See https://docs.slingdata.io/concepts/hooks.md for complete reference.

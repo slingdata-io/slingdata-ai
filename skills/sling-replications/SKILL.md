@@ -1,6 +1,13 @@
+---
+name: sling-replications
+description: >
+  Configure data replications between sources and targets in Sling.
+  Use when creating replication YAML files, setting up data sync, copying tables, or moving data between databases and files.
+---
+
 # Replications
 
-Replications are YAML configurations that define data movement from source to target systems. They support multiple streams, shared defaults, and various loading modes.
+Replications are YAML configurations that define data movement from source to target systems.
 
 ## Basic Structure
 
@@ -26,10 +33,7 @@ env:
 
 ### Parse (validate)
 ```json
-{
-  "action": "parse",
-  "input": {"file_path": "/path/to/replication.yaml"}
-}
+{"action": "parse", "input": {"file_path": "/path/to/replication.yaml"}}
 ```
 
 ### Run
@@ -87,28 +91,15 @@ streams:
 ```yaml
 streams:
   my_table:
-    # Target
-    object: schema.target_table
-
-    # Mode
-    mode: incremental
-    primary_key: [id]
-    update_key: updated_at
-
-    # Columns
+    object: schema.target_table     # Target table
+    mode: incremental               # Loading mode
+    primary_key: [id]               # PK columns
+    update_key: updated_at          # Incremental key
     columns: {id: bigint, amount: decimal(10,2)}
-    select: [id, name, email]  # or [-password] to exclude
-
-    # Custom SQL
-    sql: |
+    select: [id, name, email]       # or [-password] to exclude
+    sql: |                          # Custom SQL
       SELECT * FROM my_table
       WHERE status = 'active'
-
-    # Options
-    source_options: {}
-    target_options: {}
-
-    # Control
     disabled: false
 ```
 
@@ -116,26 +107,15 @@ streams:
 
 ```yaml
 streams:
-  # All tables in schema
-  public.*:
-
-  # Tables with prefix
-  sales.customer_*:
-
-  # Exclude specific tables
+  public.*:                    # All tables in schema
+  sales.customer_*:            # Tables with prefix
   public.sensitive_data:
-    disabled: true
-
-  # All CSV files
-  'data/*.csv':
-
-  # Recursive file matching
-  'logs/**/*.json':
+    disabled: true             # Exclude specific
+  'data/*.csv':                # All CSV files
+  'logs/**/*.json':            # Recursive matching
 ```
 
 ## Variables
-
-### Runtime Variables
 
 | Variable | Description |
 |----------|-------------|
@@ -145,25 +125,10 @@ streams:
 | `{target_schema}` | Target default schema |
 | `{stream_file_name}` | File name without extension |
 | `{YYYY}`, `{MM}`, `{DD}` | Date parts |
-| `{run_timestamp}` | Execution timestamp |
-
-### Object Naming
 
 ```yaml
 defaults:
   object: '{target_schema}.{stream_schema}_{stream_table}'
-
-streams:
-  public.users:  # -> target_schema.public_users
-```
-
-### Partition Variables (for files)
-
-```yaml
-streams:
-  transactions:
-    object: 'data/{part_year}/{part_month}/'
-    update_key: transaction_date
 ```
 
 ## Source Options
@@ -175,7 +140,6 @@ streams:
 | `limit` | Max rows to read |
 | `empty_as_null` | Treat empty strings as NULL |
 | `chunk_size` | Time interval per chunk (e.g., `6h`) |
-| `chunk_count` | Number of parallel chunks |
 
 ### File Sources
 
@@ -186,7 +150,6 @@ streams:
 | `delimiter` | Column delimiter |
 | `encoding` | Character encoding |
 | `jmespath` | Extract JSON data |
-| `flatten` | Flatten nested structures |
 
 ```yaml
 defaults:
@@ -194,7 +157,6 @@ defaults:
     format: csv
     header: true
     encoding: utf8
-    skip_blank_lines: true
 ```
 
 ## Target Options
@@ -206,7 +168,6 @@ defaults:
 | `column_casing` | snake, upper, lower, source |
 | `add_new_columns` | Auto-add new columns |
 | `use_bulk` | Use bulk loading |
-| `table_keys` | Define indexes, partitions |
 
 ### File Targets
 
@@ -216,22 +177,13 @@ defaults:
 | `compression` | gzip, snappy, zstd |
 | `file_max_rows` | Split files by row count |
 
-```yaml
-defaults:
-  target_options:
-    column_casing: snake
-    add_new_columns: true
-    file_max_rows: 1000000
-```
-
 ## Environment Variables
 
 ```yaml
 env:
   SLING_THREADS: 10           # Parallel streams
   SLING_RETRIES: 3            # Retry failed streams
-  SLING_LOADED_AT_COLUMN: true # Add timestamp column
-  SLING_STREAM_URL_COLUMN: true # Track source file
+  SLING_LOADED_AT_COLUMN: true
 ```
 
 ## Examples
@@ -252,9 +204,6 @@ streams:
   public.customers:
   public.orders:
   public.products:
-
-env:
-  SLING_THREADS: 5
 ```
 
 ### Files to Database
@@ -284,7 +233,6 @@ target: S3
 defaults:
   mode: full-refresh
   object: 'exports/{stream_table}/{YYYY}/{MM}/'
-  update_key: created_date
   target_options:
     format: parquet
     compression: snappy
@@ -296,4 +244,4 @@ streams:
 
 ## Full Documentation
 
-See https://docs.slingdata.io/concepts/replication for complete reference.
+See https://docs.slingdata.io/concepts/replication.md for complete reference.

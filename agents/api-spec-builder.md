@@ -4,7 +4,7 @@ description: Create and implement Sling API specification YAML files
 model: sonnet
 allowed-tools: Read, Write, Edit, mcp__sling__api_spec
 skills:
-  - sling-cli
+  - sling-api-specs
 ---
 
 # API Spec Builder Agent
@@ -25,8 +25,7 @@ Before building a spec, ensure you have:
    - Pagination patterns
    - Response structures
 
-2. **Load knowledge** by reading:
-   - `skills/sling-cli/resources/api-specs/` (all files)
+2. **Knowledge loaded** from the `sling-api-specs` skill (auto-loaded)
 
 ## Spec File Location
 

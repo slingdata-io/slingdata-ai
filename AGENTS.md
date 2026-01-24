@@ -22,8 +22,7 @@ slingdata-ai/
 ├── .mcp.json                # Sling MCP server configuration
 ├── commands/                # Slash commands (Claude)
 │   ├── run.md              # /sling:run - Execute replications/pipelines
-│   ├── conns.md            # /sling:conns - Connection management
-│   └── prime.md            # /sling:prime - Load documentation
+│   └── conns.md            # /sling:conns - Connection management
 ├── agents/                  # Specialized subagents (Claude)
 │   ├── api-researcher.md
 │   ├── api-cross-referencer.md
@@ -31,10 +30,15 @@ slingdata-ai/
 │   ├── api-spec-tester.md
 │   ├── replication-builder.md
 │   └── pipeline-builder.md
-├── skills/
-│   └── sling-cli/
-│       ├── SKILL.md        # Main skill entry point
-│       └── resources/      # Documentation files (21 total)
+├── skills/                  # Topic-specific skills (auto-invoked by Claude)
+│   ├── sling/              # Overview and MCP tools reference
+│   ├── sling-connections/  # Connection management
+│   ├── sling-replications/ # Data replication configs
+│   ├── sling-pipelines/    # Multi-step workflows
+│   ├── sling-transforms/   # Data transformation functions
+│   ├── sling-hooks/        # Pre/post actions
+│   ├── sling-troubleshooting/ # Debug issues
+│   └── sling-api-specs/    # API specification building (12 supporting files)
 ├── hooks/
 │   └── hooks.json          # Session hooks (Claude)
 ├── scripts/                # Helper bash scripts
@@ -54,7 +58,6 @@ Slash commands are user-invoked actions. Each `.md` file defines:
 |---------|------|---------|
 | `/sling:run` | `run.md` | Execute replication or pipeline files |
 | `/sling:conns` | `conns.md` | List, test, discover connections |
-| `/sling:prime` | `prime.md` | Load topic documentation into context |
 
 ### Agents (`agents/`)
 
@@ -66,17 +69,20 @@ See [docs/AGENTS.md](docs/AGENTS.md) for detailed agent documentation.
 
 ### Skills (`skills/`)
 
-Skills provide loadable knowledge/context. The `sling-cli` skill includes:
-- `SKILL.md` - Entry point with quick reference
-- `resources/` - Detailed documentation by topic:
-  - `CONNECTIONS.md` - Connection management
-  - `REPLICATIONS.md` - Replication configurations
-  - `PIPELINES.md` - Multi-step workflows
-  - `TRANSFORMS.md` - Data transformation functions
-  - `HOOKS.md` - Pre/post actions
-  - `TROUBLESHOOTING.md` - Common issues
-  - `MCP_TOOLS.md` - MCP tool reference
-  - `api-specs/` - 13 files for API specification development
+Skills provide loadable knowledge/context. Each skill is a separate folder with a `SKILL.md` file that Claude can auto-invoke based on the task:
+
+| Skill | Triggers |
+|-------|----------|
+| `sling` | General Sling questions, MCP tools reference |
+| `sling-connections` | "connection", "connect to", "test connection" |
+| `sling-replications` | "replication", "sync", "copy table", "data movement" |
+| `sling-pipelines` | "pipeline", "workflow", "multi-step" |
+| `sling-transforms` | "transform", "convert", "format", "date function" |
+| `sling-hooks` | "hook", "before", "after", "webhook", "notification" |
+| `sling-troubleshooting` | "error", "not working", "debug", "fix" |
+| `sling-api-specs` | "api spec", "rest api", "endpoint", "pagination" |
+
+The `sling-api-specs` skill includes 12 supporting files for detailed API specification topics (authentication, pagination, processors, etc.).
 
 ### Hooks (`hooks/`)
 
@@ -131,10 +137,11 @@ Configures the Sling MCP server which provides tools:
 
 ### Updating Skills
 
-1. Edit files in `skills/sling-cli/resources/`
-2. Keep content focused on "when" and "why", not exhaustive "how"
-3. Link to https://docs.slingdata.io for detailed specs
-4. Update `SKILL.md` if adding new resources
+1. Edit the `SKILL.md` file in the relevant skill directory (e.g., `skills/sling-connections/SKILL.md`)
+2. Keep descriptions trigger-rich for Claude auto-invocation
+3. Keep content focused on "when" and "why", not exhaustive "how"
+4. Link to https://docs.slingdata.io for detailed specs
+5. For `sling-api-specs`, supporting files can be added alongside `SKILL.md`
 
 ### Testing the Plugin
 

@@ -1,3 +1,10 @@
+---
+name: sling-connections
+description: >
+  Manage database, file system, and API connections for Sling.
+  Use when setting up connections, testing connectivity, discovering tables/files, or configuring credentials.
+---
+
 # Connection Management
 
 Connections are named endpoints for databases, file systems, and APIs. Sling stores them in `~/.sling/env.yaml`.
@@ -59,35 +66,25 @@ Connections are named endpoints for databases, file systems, and APIs. Sling sto
 ## CLI Operations
 
 ```bash
-# List all connections
-sling conns list
-
-# Test a connection
-sling conns test MY_POSTGRES --debug
-
-# Discover tables/files
-sling conns discover MY_POSTGRES --pattern "public.*"
-
-# Execute SQL
-sling conns exec MY_POSTGRES -q "SELECT 1"
+sling conns list                              # List all
+sling conns test MY_POSTGRES --debug          # Test
+sling conns discover MY_POSTGRES --pattern "public.*"  # Discover
+sling conns exec MY_POSTGRES -q "SELECT 1"    # Execute SQL
 ```
 
 ## Configuration Methods
 
 ### 1. Environment Variable
-
 ```bash
 export MY_POSTGRES='host=localhost user=postgres dbname=mydb'
 ```
 
 ### 2. URL Format
-
 ```bash
 export MY_POSTGRES='postgresql://user:pass@host:5432/dbname'
 ```
 
 ### 3. YAML in env.yaml
-
 ```yaml
 # ~/.sling/env.yaml
 connections:
@@ -148,19 +145,10 @@ connections:
 ## Discovery Patterns
 
 ```bash
-# All tables in schema
-sling conns discover MY_PG --pattern "public.*"
-
-# Tables with prefix
-sling conns discover MY_PG --pattern "sales.customer_*"
-
-# All files in directory
-sling conns discover MY_S3 --pattern "data/*.csv"
-
-# Recursive file listing
+sling conns discover MY_PG --pattern "public.*"           # All in schema
+sling conns discover MY_PG --pattern "sales.customer_*"   # With prefix
+sling conns discover MY_S3 --pattern "data/*.csv"         # Files
 sling conns discover MY_S3 --pattern "**/*.parquet" --recursive
-
-# With column metadata
 sling conns discover MY_PG --pattern "public.users" --columns
 ```
 
@@ -175,9 +163,9 @@ sling conns discover MY_PG --pattern "public.users" --columns
 ## Troubleshooting
 
 ### Connection refused
-- Check host/port accessibility
+- Check host/port accessibility: `telnet host port`
 - Verify firewall rules
-- Test with `telnet host port`
+- Confirm database is running
 
 ### Authentication failed
 - Verify username/password
@@ -187,6 +175,7 @@ sling conns discover MY_PG --pattern "public.users" --columns
 ### SSL/TLS errors
 - Add `sslmode=disable` for testing (not production)
 - Verify certificate validity
-- Check SSL configuration
 
-See [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for more solutions.
+## Full Documentation
+
+See https://docs.slingdata.io/connections.md for complete reference.

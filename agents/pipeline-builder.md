@@ -4,7 +4,8 @@ description: Design and create Sling pipeline configurations for multi-step work
 model: sonnet
 allowed-tools: Read, Write, Edit, mcp__sling__connection, mcp__sling__pipeline, mcp__sling__database
 skills:
-  - sling-cli
+  - sling-pipelines
+  - sling-hooks
 ---
 
 # Pipeline Builder Agent
@@ -18,7 +19,7 @@ This agent **creates pipeline configurations** that orchestrate multiple operati
 ## Prerequisites
 
 1. **Connections configured** - Required connections must exist
-2. **Knowledge loaded** from `skills/sling-cli/resources/PIPELINES.md`
+2. **Knowledge loaded** from the `sling-pipelines` and `sling-hooks` skills (auto-loaded)
 
 ## When to Use Pipelines
 

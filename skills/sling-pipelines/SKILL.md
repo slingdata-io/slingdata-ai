@@ -1,6 +1,13 @@
+---
+name: sling-pipelines
+description: >
+  Create multi-step data workflows with Sling pipelines.
+  Use when orchestrating multiple operations, running tasks before/after replications, or building complex data workflows with conditionals and loops.
+---
+
 # Pipelines
 
-Pipelines are multi-step workflows that execute a sequence of tasks. Unlike replications (single source to target), pipelines orchestrate multiple operations with control flow.
+Pipelines are multi-step workflows that execute a sequence of tasks with control flow.
 
 ## When to Use Pipelines
 
@@ -9,7 +16,6 @@ Pipelines are multi-step workflows that execute a sequence of tasks. Unlike repl
 - Implement data validation
 - Send notifications
 - Manage file operations
-- Create complex workflows
 
 ## Basic Structure
 
@@ -35,10 +41,7 @@ steps:
 
 ### Parse
 ```json
-{
-  "action": "parse",
-  "input": {"file_path": "/path/to/pipeline.yaml"}
-}
+{"action": "parse", "input": {"file_path": "/path/to/pipeline.yaml"}}
 ```
 
 ### Run
@@ -68,7 +71,6 @@ steps:
 | `write` | Write to files |
 | `read` | Read file contents |
 | `list` | List files |
-| `inspect` | Get file/table metadata |
 | `store` | Store values |
 | `group` | Group steps, enable looping |
 
@@ -95,8 +97,6 @@ steps:
   path: /path/to/replication.yaml
   select_streams: ["users", "orders"]
   mode: "incremental"
-  env:
-    SLING_THREADS: 8
   id: my_repl
 ```
 
@@ -136,7 +136,7 @@ steps:
 - type: check
   check: "state.count_query.result[0].cnt > 0"
   failure_message: "No records found"
-  on_failure: abort  # abort, warn, quiet, skip
+  on_failure: abort
 ```
 
 ### copy
@@ -147,19 +147,11 @@ steps:
   recursive: true
 ```
 
-### delete
-```yaml
-- type: delete
-  location: "file:///tmp/temp_files/"
-  recursive: true
-```
-
 ### store
 ```yaml
 - type: store
   key: my_value
   value: "something"
-
 # Later: {store.my_value}
 ```
 
@@ -185,13 +177,11 @@ steps:
 
 - type: http
   url: "https://slack.com/webhook"
-  method: POST
   payload: '{"text": "Success!"}'
   if: state.main_job.status == "success"
 
 - type: http
   url: "https://slack.com/webhook"
-  method: POST
   payload: '{"text": "Failed!"}'
   if: state.main_job.status == "error"
 ```
@@ -214,8 +204,6 @@ steps:
 
 ## Error Handling
 
-### on_failure Options
-
 | Option | Behavior |
 |--------|----------|
 | `abort` | Stop pipeline (default) |
@@ -232,27 +220,12 @@ steps:
 
 ## Variables
 
-### Accessing Step Results
-
-```yaml
-- type: query
-  connection: MY_DB
-  query: "SELECT COUNT(*) as cnt FROM users"
-  id: user_count
-
-- type: log
-  message: "Users: {state.user_count.result[0].cnt}"
-```
-
-### Built-in Variables
-
 | Variable | Description |
 |----------|-------------|
 | `{env.VAR}` | Environment variables |
 | `{store.key}` | Stored values |
 | `{state.id.*}` | Step results by ID |
 | `{timestamp.date}` | Current date |
-| `{timestamp.YYYY}` | Year |
 | `{loop.value}` | Current loop item |
 | `{loop.index}` | Loop iteration index |
 
@@ -282,9 +255,7 @@ steps:
     url: "{env.SLACK_WEBHOOK}"
     method: POST
     payload: |
-      {
-        "text": "Pipeline completed: {state.main_sync.total_rows} rows"
-      }
+      {"text": "Pipeline completed: {state.main_sync.total_rows} rows"}
 
   - type: log
     message: "Pipeline finished"
@@ -292,4 +263,4 @@ steps:
 
 ## Full Documentation
 
-See https://docs.slingdata.io/concepts/pipeline for complete reference.
+See https://docs.slingdata.io/concepts/pipeline.md for complete reference.

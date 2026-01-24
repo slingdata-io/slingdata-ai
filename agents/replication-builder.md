@@ -4,7 +4,8 @@ description: Design and create Sling replication configurations for data movemen
 model: sonnet
 allowed-tools: Read, Write, Edit, mcp__sling__connection, mcp__sling__replication, mcp__sling__database
 skills:
-  - sling-cli
+  - sling-replications
+  - sling-connections
 ---
 
 # Replication Builder Agent
@@ -18,7 +19,7 @@ This agent **creates replication configurations** based on user requirements. It
 ## Prerequisites
 
 1. **Connections configured** - Source and target connections must exist
-2. **Knowledge loaded** from `skills/sling-cli/resources/REPLICATIONS.md`
+2. **Knowledge loaded** from the `sling-replications` and `sling-connections` skills (auto-loaded)
 
 ## Discovery Process
 

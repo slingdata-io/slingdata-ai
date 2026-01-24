@@ -1,3 +1,10 @@
+---
+name: sling-troubleshooting
+description: >
+  Debug and fix Sling connection, replication, and API issues.
+  Use when encountering errors, debugging connection failures, fixing authentication problems, resolving type conversion issues, handling memory/performance problems, or troubleshooting API rate limits.
+---
+
 # Troubleshooting
 
 Common issues and solutions when using Sling.

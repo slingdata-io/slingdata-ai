@@ -1,3 +1,10 @@
+---
+name: sling-transforms
+description: >
+  Data transformation functions for Sling replications, pipelines, and API specs.
+  Use when transforming data, applying string/date/numeric functions, type casting, cleaning data, computing fields, or using expressions like trim, upper, lower, date_format, cast, coalesce, hash.
+---
+
 # Data Transformation Functions
 
 Sling provides 50+ built-in functions for data transformation in replications, pipelines, and API specs.
@@ -115,12 +122,7 @@ transforms:
 | `jmespath(obj, expr)` | JMESPath query | `jmespath(data, "items[].name")` |
 | `get_path(obj, path)` | Get by path | `get_path(obj, "a.b[0]")` |
 | `object_merge(...)` | Merge objects | `object_merge({a:1}, {b:2})` |
-| `object_rename(m, old, new)` | Rename keys | `object_rename({a:1}, "a", "x")` |
-| `object_delete(m, k)` | Delete keys | `object_delete({a:1,b:2}, "a")` |
-| `object_casing(m, case)` | Change casing | `object_casing(m, "snake")` |
-| `object_zip(keys, vals)` | Zip to object | `object_zip(["a","b"], [1,2])` |
 | `chunk(arr, size)` | Split chunks | `chunk([1,2,3,4], 2)` |
-| `range(s, e, step?)` | Generate range | `range(1, 5)` -> [1,2,3,4,5] |
 
 ## Encoding Functions
 
@@ -143,8 +145,6 @@ transforms:
 | `regex_extract(s, pat, i)` | Extract match | `regex_extract("id=123", "id=(\\d+)", 1)` |
 | `regex_replace(s, pat, r)` | Replace pattern | `regex_replace("a1b2", "\\d", "X")` |
 | `type_of(v)` | Get type | `type_of(42)` -> "integer" |
-| `pretty_table(data)` | Format table | Formats array of maps |
-| `conn_property(c, k)` | Get conn prop | `conn_property("MY_DB", "host")` |
 
 ## Transform Examples
 
@@ -183,4 +183,4 @@ transforms:
 
 ## Full Documentation
 
-See https://docs.slingdata.io/concepts/functions for complete reference.
+See https://docs.slingdata.io/concepts/functions.md for complete reference.
