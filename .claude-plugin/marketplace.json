@@ -1,5 +1,5 @@
 {
-  "name": "sling-ai",
+  "name": "slingdata-ai",
   "owner": {
     "name": "Sling",
     "email": "support@slingdata.io"
@@ -10,10 +10,10 @@
   },
   "plugins": [
     {
-      "name": "sling-ai",
+      "name": "sling",
       "source": {
         "source": "github",
-        "repo": "slingdata-io/sling-ai"
+        "repo": "slingdata-io/slingdata-ai"
       },
       "description": "Data integration CLI for moving data between 40+ databases, file systems, and APIs",
       "version": "1.0.0",
@@ -22,7 +22,7 @@
         "email": "support@slingdata.io"
       },
       "homepage": "https://docs.slingdata.io",
-      "repository": "https://github.com/slingdata-io/sling-ai",
+      "repository": "https://github.com/slingdata-io/slingdata-ai",
       "license": "AGPL-3.0",
       "keywords": [
         "data-integration",

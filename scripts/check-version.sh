@@ -2,7 +2,7 @@
 # Check for plugin updates from GitHub main branch
 
 PLUGIN_ROOT="${CLAUDE_PLUGIN_ROOT:-$(dirname "$(dirname "$0")")}"
-REPO_RAW="https://raw.githubusercontent.com/slingdata-io/sling-ai/main"
+REPO_RAW="https://raw.githubusercontent.com/slingdata-io/slingdata-ai/main"
 
 # Read local version
 VERSION_FILE="$PLUGIN_ROOT/VERSION"
@@ -31,8 +31,8 @@ if [ "$LOCAL" != "$REMOTE" ]; then
     echo "│  Sling AI plugin update available: $LOCAL → $REMOTE         │"
     echo "│                                                             │"
     echo "│  To update, run:                                            │"
-    echo "│    /plugin marketplace update slingdata-io-sling-ai         │"
-    echo "│    /plugin update sling-ai@slingdata-io-sling-ai            │"
+    echo "│    /plugin marketplace update slingdata-ai                      │"
+    echo "│    /plugin update sling@slingdata-ai                             │"
     echo "│                                                             │"
     echo "│  Or use the interactive UI: /plugin → Marketplaces tab      │"
     echo "└─────────────────────────────────────────────────────────────┘"

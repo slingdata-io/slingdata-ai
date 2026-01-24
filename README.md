@@ -24,31 +24,31 @@ This repository works with multiple AI coding assistants:
 
 ```bash
 # 1. Add the marketplace
-/plugin marketplace add slingdata-io/sling-ai
+/plugin marketplace add slingdata-io/slingdata-ai
 
 # 2. Install the plugin
-/plugin install sling-ai@slingdata-io-sling-ai
+/plugin install sling@slingdata-ai
 ```
 
 Or use the interactive UI:
 ```bash
 /plugin
-# Navigate to "Marketplaces" tab → Add → slingdata-io/sling-ai
-# Then "Discover" tab → Install sling-ai
+# Navigate to "Marketplaces" tab → Add → slingdata-io/slingdata-ai
+# Then "Discover" tab → Install sling
 ```
 
 **For local development:**
 
 ```bash
-claude --plugin-dir /path/to/sling-ai
+claude --plugin-dir /path/to/slingdata-ai
 ```
 
 ### Updating
 
 ```bash
 # Refresh marketplace and update plugin
-/plugin marketplace update slingdata-io-sling-ai
-/plugin update sling-ai@slingdata-io-sling-ai
+/plugin marketplace update slingdata-ai
+/plugin update sling@slingdata-ai
 ```
 
 ## Features
@@ -129,7 +129,7 @@ The plugin configures the Sling MCP server which provides tools for:
 ## Project Structure
 
 ```
-sling-ai/
+slingdata-ai/
 ├── AGENTS.md                # Primary AI instructions (source of truth)
 ├── CLAUDE.md                # Symlink → AGENTS.md
 ├── GEMINI.md                # Symlink → AGENTS.md

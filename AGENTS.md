@@ -11,7 +11,7 @@ AI plugin for [Sling](https://slingdata.io) - the data integration CLI for movin
 ## Directory Structure
 
 ```
-sling-ai/
+slingdata-ai/
 ├── AGENTS.md                # Primary instructions (this file)
 ├── CLAUDE.md -> AGENTS.md   # Symlink for Claude Code
 ├── GEMINI.md -> AGENTS.md   # Symlink for Gemini CLI
@@ -140,7 +140,7 @@ Configures the Sling MCP server which provides tools:
 
 ```bash
 # Load plugin locally
-claude --plugin-dir /Users/fritz/__/Git/sling-ai
+claude --plugin-dir /Users/fritz/__/Git/slingdata-ai
 
 # Test commands
 /sling:conns list
