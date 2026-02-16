@@ -12,6 +12,7 @@ response:
   # Record extraction
   records:
     jmespath: "data.items[]"
+    # or: jq: ".data.items[]"
     primary_key: ["id"]
     update_key: "updated_at"
     limit: 1000
@@ -20,21 +21,26 @@ response:
 
 ## Record Extraction
 
-### JMESPath
+### JMESPath / jq
 
-Extract records array from response using JMESPath:
+Extract records array from response using JMESPath or jq (mutually exclusive — use one or the other):
 
 ```yaml
 response:
   records:
-    # Simple array
+    # Simple array (JMESPath)
     jmespath: "data[]"
+    # Simple array (jq)
+    # jq: ".data[]"
 
-    # Nested path
+    # Nested path (JMESPath)
     jmespath: "response.results.items[]"
+    # Nested path (jq)
+    # jq: ".response.results.items[]"
 
     # Single object as array
     jmespath: "[user]"
+    # jq: "[.user]"
 ```
 
 ### Primary Key

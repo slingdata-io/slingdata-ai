@@ -120,6 +120,7 @@ transforms:
 | `sort(arr, desc?)` | Sort array | `sort([3,1,2])` -> [1,2,3] |
 | `pluck(arr, key)` | Extract field | `pluck([{a:1},{a:2}], "a")` -> [1,2] |
 | `jmespath(obj, expr)` | JMESPath query | `jmespath(data, "items[].name")` |
+| `jq(obj, expr)` | jq filter (returns array) | `jq(data, ".items[].name")` |
 | `get_path(obj, path)` | Get by path | `get_path(obj, "a.b[0]")` |
 | `object_merge(...)` | Merge objects | `object_merge({a:1}, {b:2})` |
 | `chunk(arr, size)` | Split chunks | `chunk([1,2,3,4], 2)` |

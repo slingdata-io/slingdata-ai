@@ -153,9 +153,13 @@ processors:
   - expression: 'object("user_id", record.id, "full_name", record.name)'
     output: "record"
 
-  # Flatten nested structure
+  # Flatten nested structure (jmespath)
   - expression: 'jmespath(record, "{id: id, name: user.name, country: address.country}")'
     output: "record"
+
+  # Flatten nested structure (jq) — [0] needed since jq() returns array
+  # - expression: 'jq(record, "{id, name: .user.name, country: .address.country}")[0]'
+  #   output: "record"
 ```
 
 ## Extending Processors

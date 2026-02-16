@@ -95,6 +95,7 @@ range(date_add(now(), -7, "day"), now(), "1d")
 | `values(map)` | Get values | `values({"a":1})` → [1] |
 | `exists(coll, item)` | Check existence | `exists({"a":1}, "a")` → true |
 | `jmespath(obj, expr)` | JMESPath query | `jmespath(data, "items[].id")` |
+| `jq(obj, expr)` | jq filter (returns array) | `jq(data, ".items[].id")` |
 | `get_path(obj, path)` | Dot notation access | `get_path(data, "a.b[0]")` |
 | `object_rename(map, old, new, ...)` | Rename keys | `object_rename(m, "a", "x")` |
 | `object_delete(map, k1, ...)` | Delete keys | `object_delete(m, "a")` |
@@ -114,8 +115,11 @@ range(date_add(now(), -7, "day"), now(), "1d")
 # Select fields
 object("id", record.id, "name", record.name)
 
-# Flatten nested
+# Flatten nested (jmespath)
 jmespath(record, "{id: id, email: user.email}")
+
+# Flatten nested (jq) — returns array, use [0] for single record
+jq(record, "{id, email: .user.email}")[0]
 
 # Filter active items
 filter(records, "value.status == \"active\"")
